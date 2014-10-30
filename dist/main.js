@@ -379,22 +379,27 @@
 	    this.setState({
 	      value: this.state.value - this.props.step
 	    });
+	
+	    this.props.onChange && 
+	      this.props.onChange(this.state.value - this.props.step);
 	  },
 	
 	  handleNext:function () {
 	    this.setState({
 	      value: this.state.value + this.props.step
 	    });
+	
+	    this.props.onChange && 
+	      this.props.onChange(this.state.value + this.props.step);
 	  },
 	
 	  handleChange:function (e) {
 	    this.setState({
 	      value: +e.target.value
 	    });
-	  },
 	
-	  componentWillUpdate:function (_, nextState) {
-	    this.props.onChange && this.props.onChange(nextState.value);
+	    this.props.onChange && 
+	      this.props.onChange(+e.target.value);
 	  },
 	
 	  hasNext:function () {
