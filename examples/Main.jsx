@@ -57,7 +57,7 @@ var Main = React.createClass({
   render () {
     return (
       <main>
-        <Tree tree={this.state.tree} line={true} horizontal={true}/>
+        <Tree tree={this.state.tree} line={false} horizontal={true}/>
         <Slider min={0} max={CALLS.length - 1} step={1} 
                 onChange={this.handleSliderChange}/>
       </main>

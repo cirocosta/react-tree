@@ -50,7 +50,7 @@ var Tree = React.createClass({
     return (
       <svg viewBox={"0 0 460 460"}
            preserveAspectRatio="xMidYMid">
-        <g className={'Tree'} transform="translate(40,20)">
+        <g className={'Tree'} transform="translate(40,40)">
           {linkElems}
           {nodeElems}
         </g>
