@@ -1,0 +1,99 @@
+.Slider {
+  input {
+    -webkit-appearance: none;
+    border: none;
+    width: 80%;
+    margin: 0;
+    cursor: move;
+  }
+
+  input::-webkit-slider-runnable-track {
+    width: 80%;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+  }
+
+  input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+    margin-top: -4px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  input:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+  }
+
+  input::-moz-range-track {
+    width: 80%;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+  }
+
+  input::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+  }
+
+  input:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+  }
+
+  input::-ms-track {
+    width: 80%;
+    height: 5px;
+    background: transparent;
+    border-color: transparent;
+    border-width: 6px 0;
+    color: transparent;
+  }
+
+  input::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+  }
+
+  input::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+  }
+
+  input::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: goldenrod;
+  }
+
+  input:focus::-ms-fill-lower {
+    background: #888;
+  }
+
+  input:focus::-ms-fill-upper {
+    background: #ccc;
+  }
+
+  button {
+    cursor: pointer;
+    width: 10%;
+    border: none;
+    font-size: 18px;
+    background: yellow;
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "Ciro S. Costa <ciro9758@gmail.com> (http://www.cirocosta.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "css-loader": "^0.9.0",
+    "d3": "^3.4.13",
+    "object-assign": "^1.0.0",
+    "sass-loader": "^0.3.0",
+    "style-loader": "^0.8.1"
+  }
+}

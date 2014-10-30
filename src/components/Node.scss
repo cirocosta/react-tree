@@ -1,0 +1,31 @@
+.Node {
+  cursor: pointer;
+  opacity: .4;
+
+  text {
+    font-size: 12px;
+    transition: font-size .1s ease;
+  }
+
+  circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 3px;
+    transform: scale(1);
+    transition: transform .1s ease;
+  }
+
+  &.active {
+    opacity: 1;
+
+    circle {
+      fill: yellow;
+      stroke: yellow;
+      transform: scale(3);
+    }
+
+    text {
+      font-size: 36px;
+    }
+  }
+}
