@@ -4,7 +4,7 @@ require('./Tree.scss');
 var React = require('react');
 var d3 = require('d3');
 var Node = require('./Node.jsx');
-var {bfs, Memoizer} = require('../util');
+var {bfs, Memoizer, cx} = require('../util');
 
 var Tree = React.createClass({
   propTypes: {
@@ -45,7 +45,9 @@ var Tree = React.createClass({
             r={10} key={i} active={node.active} />);
 
     var linkElems = links.map((link, i) =>
-      <path key={i} className={'Link'} d={pathGen(link, i)}></path>);
+      <path key={i} 
+            className={cx({Link: true, active: link.target.activeLink})} 
+            d={pathGen(link, i)}></path>);
 
     return (
       <svg viewBox={"0 0 460 460"}

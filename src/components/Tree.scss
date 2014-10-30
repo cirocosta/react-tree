@@ -1,8 +1,12 @@
 .Tree {
-}
+  .Link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
 
-.Link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 2px;
+    &.active {
+      stroke: yellow !important;
+      stroke-width: 3px !important;
+    }
+  }
 }

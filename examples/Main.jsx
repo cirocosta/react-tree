@@ -47,6 +47,7 @@ var Main = React.createClass({
     if (CALLS[state]) {
       var a = bfs(treeData[0], CALLS[state]);
       a.active = true;
+      a.activeLink = true;
 
       this.setState({
         tree: treeData
