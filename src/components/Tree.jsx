@@ -11,10 +11,12 @@ var Tree = React.createClass({
     margins: React.PropTypes.object.isRequired,
     width: React.PropTypes.number.isRequired,
     height: React.PropTypes.number.isRequired,
-    line: React.PropTypes.bool
+    line: React.PropTypes.bool,
+    horizontal: React.PropTypes.bool
   },
 
   render () {
+    var ort = this.props.horizontal ? ['y', 'x'] : ['x', 'y'];
     var pathGen;
     var root = this.props.tree[0];
     var tree = d3.layout
@@ -27,18 +29,18 @@ var Tree = React.createClass({
 
     if (!this.props.line)
       pathGen = d3.svg.diagonal()
-                      .projection((d) => [d.y, d.x]);
+                      .projection((d) => [d[ort[0]], d[ort[1]]]);
     else
       pathGen = (d) => d3.svg.line()
-                       .x((d) => d.y)
-                       .y((d) => d.x)([{x: d.source.x, y: d.source.y}, 
-                                       {x: d.target.x, y: d.target.y}]);
+                       .x((d) => d[ort[0]])
+                       .y((d) => d[ort[1]])([{x: d.source.x, y: d.source.y}, 
+                                             {x: d.target.x, y: d.target.y}]);
 
 
     nodes.forEach((d) => {d.y = d.depth * 180;});
 
     var nodeElems = nodes.map((node, i) =>
-      <Node x={node.y} y={node.x} name={node.name} 
+      <Node x={node[ort[0]]} y={node[ort[1]]} name={node.name} 
             r={10} key={i} active={node.active} />);
 
     var linkElems = links.map((link, i) =>

@@ -70,9 +70,11 @@ var Main = React.createClass({
     return (
       <main>
         <Layout margins={MARGINS} sizes={SIZES}>
-          <Tree tree={this.state.tree} width={width} height={height} margins={MARGINS} line={true} />
+          <Tree tree={this.state.tree} width={width} height={height} 
+                margins={MARGINS} line={true} horizontal={true}/>
         </Layout>
-        <Slider min={0} max={CALLS.length - 1} step={1} onChange={this.handleSliderChange}/>
+        <Slider min={0} max={CALLS.length - 1} step={1} 
+                onChange={this.handleSliderChange}/>
       </main>
     );
   }
