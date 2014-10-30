@@ -10,21 +10,27 @@ var Tree = React.createClass({
   propTypes: {
     tree: React.PropTypes.array.isRequired,
     line: React.PropTypes.bool,
-    horizontal: React.PropTypes.bool
+    horizontal: React.PropTypes.bool,
+    onNodeClick: React.PropTypes.func,
+    circleRadius: React.PropTypes.number
   },
 
-  statics : {
+  getDefaultProps () {
+    return {
+      circleRadius: 10
+    }
+  },
+
+  statics: {
     bfs: bfs,
     Memoizer: Memoizer
   },
 
   render () {
-    var ort = this.props.horizontal ? ['y', 'x'] : ['x', 'y'];
     var pathGen;
+    var tree = d3.layout.tree().size([460, 460]);
+    var ort = this.props.horizontal ? ['y', 'x'] : ['x', 'y'];
     var root = this.props.tree[0];
-    var tree = d3.layout
-                 .tree()
-                 .size([460, 460]);
     var nodes = tree.nodes(root);
     var links = tree.links(nodes);
 
@@ -41,8 +47,9 @@ var Tree = React.createClass({
     nodes.forEach((d) => {d.y = d.depth * 180;});
 
     var nodeElems = nodes.map((node, i) =>
-      <Node x={node[ort[0]]} y={node[ort[1]]} name={node.name} 
-            r={10} key={i} active={node.active} />);
+      <Node x={node[ort[0]]} y={node[ort[1]]} name={node.name}
+            onClick={this.props.onNodeClick} r={this.props.circleRadius} 
+            key={i} node={node} />);
 
     var linkElems = links.map((link, i) =>
       <path key={i} 

@@ -11,7 +11,13 @@ var Node = React.createClass({
     x: React.PropTypes.number.isRequired,
     y: React.PropTypes.number.isRequired,
     r: React.PropTypes.number.isRequired,
-    active: React.PropTypes.bool
+
+    onClick: React.PropTypes.func,
+  },
+
+  handleClick () {
+    this.props.onClick && 
+      this.props.onClick(this.props.node);
   },
 
   render () {
@@ -20,12 +26,12 @@ var Node = React.createClass({
 
     var classes = cx({
       Node: true,
-      active: this.props.active
+      active: this.props.node.active
     });
 
     return (
       <g className={classes} transform={translate}>
-        <circle r={this.props.r} />
+        <circle r={this.props.r} onClick={this.handleClick} />
         <text style={{fillOpacity: '1'}} y={this.props.r * -1.5}>{this.props.name}</text>
       </g>
     );

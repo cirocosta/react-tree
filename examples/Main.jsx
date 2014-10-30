@@ -43,6 +43,10 @@ var Main = React.createClass({
     };
   },
 
+  handleNodeClick (node) {
+    console.log(node);
+  },
+
   handleSliderChange (state) {
     if (CALLS[state]) {
       var a = bfs(treeData[0], CALLS[state]);
@@ -58,7 +62,10 @@ var Main = React.createClass({
   render () {
     return (
       <main>
-        <Tree tree={this.state.tree} line={false} horizontal={true}/>
+        <Tree tree={this.state.tree} 
+              line={false} 
+              horizontal={true} 
+              onNodeClick={this.handleNodeClick} />
         <Slider min={0} max={CALLS.length - 1} step={1} 
                 onChange={this.handleSliderChange}/>
       </main>
