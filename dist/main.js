@@ -92,36 +92,14 @@
 	
 	var React = __webpack_require__(/*! react */ 5);
 	
-	var computeSize = function(sizes, margins)  {
-	  var width = sizes.width +
-	              margins.right +
-	              margins.left;
-	  var height = sizes.height +
-	               margins.top +
-	               margins.bottom;
-	
-	  return {width:width, height:height};
-	};
-	
 	/**
 	 * Represents the Layout of what will hold the
 	 * tree, i.e, the enclosing SVG and big G.
 	 */
 	var Layout = React.createClass({displayName: 'Layout',
-	  propTypes: {
-	    margins: React.PropTypes.object.isRequired,
-	    sizes: React.PropTypes.object.isRequired
-	  },
-	
-	  statics: {
-	    computeSize: computeSize
-	  },
-	
 	  render:function () {
-	    var $__0=   computeSize(this.props.sizes, this.props.margins),width=$__0.width,height=$__0.height;
-	
 	    return (
-	      React.DOM.svg({viewBox: "0 0 " + 460 + " " + 460, 
+	      React.DOM.svg({viewBox: "0 0 460 460", 
 	           preserveAspectRatio: "xMidYMid"}, 
 	        this.props.children
 	      )
@@ -220,14 +198,6 @@
 	var Layout = __webpack_require__(/*! ./Layout.jsx */ 2);
 	var Tree = __webpack_require__(/*! ./Tree.jsx */ 6);
 	var Slider = __webpack_require__(/*! ./Slider.jsx */ 7);
-	var MARGINS = {
-	  top: 20, right: 20,
-	  bottom: 20, left: 20
-	};
-	var SIZES = {
-	  width: 500 - MARGINS.right - MARGINS.left,
-	  height: 500 - MARGINS.top - MARGINS.bottom
-	};
 	
 	bfs = Memoizer(bfs).init();
 	
@@ -250,13 +220,10 @@
 	  },
 	
 	  render:function () {
-	    var $__0=   Layout.computeSize(SIZES, MARGINS),width=$__0.width,height=$__0.height;
-	
 	    return (
 	      React.DOM.main(null, 
-	        Layout({margins: MARGINS, sizes: SIZES}, 
-	          Tree({tree: this.state.tree, width: width, height: height, 
-	                margins: MARGINS, line: true, horizontal: true})
+	        Layout(null, 
+	          Tree({tree: this.state.tree, line: true, horizontal: true})
 	        ), 
 	        Slider({min: 0, max: CALLS.length - 1, step: 1, 
 	                onChange: this.handleSliderChange})
@@ -295,9 +262,6 @@
 	var Tree = React.createClass({displayName: 'Tree',
 	  propTypes: {
 	    tree: React.PropTypes.array.isRequired,
-	    margins: React.PropTypes.object.isRequired,
-	    width: React.PropTypes.number.isRequired,
-	    height: React.PropTypes.number.isRequired,
 	    line: React.PropTypes.bool,
 	    horizontal: React.PropTypes.bool
 	  },
@@ -308,9 +272,7 @@
 	    var root = this.props.tree[0];
 	    var tree = d3.layout
 	                 .tree()
-	                 .size([this.props.height, this.props.width]);
-	    var gTransf = 'translate(' + this.props.margins.left + ',' +
-	                                 this.props.margins.top + ')';
+	                 .size([460, 460]);
 	    var nodes = tree.nodes(root);
 	    var links = tree.links(nodes);
 	
@@ -334,7 +296,7 @@
 	      {return React.DOM.path({key: i, className: 'Link', d: pathGen(link, i)});});
 	
 	    return (
-	      React.DOM.g({className: 'Tree', transform: gTransf}, 
+	      React.DOM.g({className: 'Tree', transform: "translate(40,20)"}, 
 	        linkElems, 
 	        nodeElems
 	      )

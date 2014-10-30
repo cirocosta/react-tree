@@ -2,6 +2,7 @@
  * @jsx React.DOM
  */
 
+require('../dist/react-tree.css');
 var React = require('react');
 var treeData = [
   {
@@ -31,20 +32,9 @@ var treeData = [
 ];
 
 var CALLS = [null, 'A', 'B', 'D'];
-var {bfs, Memoizer} = require('../util');
-var Layout = require('./Layout.jsx');
-var Tree = require('./Tree.jsx');
-var Slider = require('./Slider.jsx');
-var MARGINS = {
-  top: 20, right: 20,
-  bottom: 20, left: 20
-};
-var SIZES = {
-  width: 500 - MARGINS.right - MARGINS.left,
-  height: 500 - MARGINS.top - MARGINS.bottom
-};
-
-bfs = Memoizer(bfs).init();
+var Tree = require('../dist/react-tree');
+var Slider = require('./components/Slider.jsx');
+var bfs = Tree.Memoizer(Tree.bfs).init();
 
 var Main = React.createClass({
   getInitialState () {
@@ -65,14 +55,9 @@ var Main = React.createClass({
   },
 
   render () {
-    var {width, height} = Layout.computeSize(SIZES, MARGINS);
-
     return (
       <main>
-        <Layout margins={MARGINS} sizes={SIZES}>
-          <Tree tree={this.state.tree} width={width} height={height} 
-                margins={MARGINS} line={true} horizontal={true}/>
-        </Layout>
+        <Tree tree={this.state.tree} line={true} horizontal={true}/>
         <Slider min={0} max={CALLS.length - 1} step={1} 
                 onChange={this.handleSliderChange}/>
       </main>
@@ -80,4 +65,7 @@ var Main = React.createClass({
   }
 });
 
-module.exports = Main;
+React.renderComponent(
+  <Main />,
+  document.body
+);
