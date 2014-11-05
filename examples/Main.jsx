@@ -19,7 +19,13 @@ var treeData = [
           },
           {
             "name": "D",
-            "id": "D"
+            "id": "D",
+            "children": [
+              {
+                "name": "F",
+                "id": "F"
+              },   
+            ]
           }
         ]
       },
@@ -64,7 +70,7 @@ var Main = React.createClass({
       <main>
         <Tree tree={this.state.tree} 
               line={false} 
-              horizontal={true} 
+              horizontal={false} 
               onNodeClick={this.handleNodeClick} />
         <Slider min={0} max={CALLS.length - 1} step={1} 
                 onChange={this.handleSliderChange}/>

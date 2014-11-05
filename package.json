@@ -1,6 +1,6 @@
 {
-  "name": "code",
-  "version": "0.0.2",
+  "name": "react-tree",
+  "version": "0.0.3",
   "main": "dist/react-tree.js",
   "author": "Ciro S. Costa <ciro9758@gmail.com> (https://cirocosta.github.io)",
   "license": "MIT",
@@ -10,6 +10,7 @@
     "extract-text-webpack-plugin": "^0.3.3",
     "jsx-loader": "^0.12.1",
     "object-assign": "^1.0.0",
+    "react": "^0.12.0",
     "sass-loader": "^0.3.0",
     "style-loader": "^0.8.1"
   },
@@ -24,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/cirocosta/react-tree/issues"
   },
-  "homepage": "https://github.com/cirocosta/react-tree"
+  "homepage": "https://github.com/cirocosta/react-tree",
+  "dependencies": {
+    "webpack": "^1.4.12"
+  }
 }

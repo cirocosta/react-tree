@@ -6,6 +6,8 @@ var d3 = require('d3');
 var Node = require('./Node.jsx');
 var {bfs, Memoizer, cx} = require('../util');
 
+var SIZE = 460;
+
 var Tree = React.createClass({
   propTypes: {
     tree: React.PropTypes.array.isRequired,
@@ -28,11 +30,13 @@ var Tree = React.createClass({
 
   render () {
     var pathGen;
-    var tree = d3.layout.tree().size([460, 460]);
+    var tree = d3.layout.tree().size([SIZE, SIZE]);
     var ort = this.props.horizontal ? ['y', 'x'] : ['x', 'y'];
     var root = this.props.tree[0];
     var nodes = tree.nodes(root);
     var links = tree.links(nodes);
+    var depth = nodes.reduce((max, curr) => 
+      curr.depth > max ? curr.depth : max, -1) + 1;
 
     if (!this.props.line)
       pathGen = d3.svg.diagonal()
@@ -43,8 +47,7 @@ var Tree = React.createClass({
                        .y((d) => d[ort[1]])([{x: d.source.x, y: d.source.y}, 
                                              {x: d.target.x, y: d.target.y}]);
 
-
-    nodes.forEach((d) => {d.y = d.depth * 180;});
+    nodes.forEach((d) => {d.y = d.depth * SIZE/depth;});
 
     var nodeElems = nodes.map((node, i) =>
       <Node x={node[ort[0]]} y={node[ort[1]]} name={node.name}
@@ -57,7 +60,7 @@ var Tree = React.createClass({
             d={pathGen(link, i)}></path>);
 
     return (
-      <svg viewBox={"0 0 460 460"}
+      <svg viewBox={"0 0 " + SIZE + ' ' + SIZE}
            preserveAspectRatio="xMidYMid">
         <g className={'Tree'} transform="translate(40,40)">
           {linkElems}
