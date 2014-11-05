@@ -69,7 +69,6 @@ var Main = React.createClass({
     return (
       <main>
         <Tree tree={this.state.tree} 
-              line={false} 
               horizontal={false} 
               onNodeClick={this.handleNodeClick} />
         <Slider min={0} max={CALLS.length - 1} step={1} 

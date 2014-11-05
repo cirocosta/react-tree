@@ -1,12 +1,11 @@
 {
   "name": "react-tree",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/react-tree.js",
   "author": "Ciro S. Costa <ciro9758@gmail.com> (https://cirocosta.github.io)",
   "license": "MIT",
   "devDependencies": {
     "css-loader": "^0.9.0",
-    "d3": "^3.4.13",
     "extract-text-webpack-plugin": "^0.3.3",
     "jsx-loader": "^0.12.1",
     "object-assign": "^1.0.0",

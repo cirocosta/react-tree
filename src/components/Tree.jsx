@@ -2,16 +2,14 @@
 
 require('./Tree.scss');
 var React = require('react');
-var d3 = require('d3');
 var Node = require('./Node.jsx');
-var {bfs, Memoizer, cx} = require('../util');
+var {bfs, Memoizer, cx, d3} = require('../util');
 
 var SIZE = 460;
 
 var Tree = React.createClass({
   propTypes: {
     tree: React.PropTypes.array.isRequired,
-    line: React.PropTypes.bool,
     horizontal: React.PropTypes.bool,
     onNodeClick: React.PropTypes.func,
     circleRadius: React.PropTypes.number
@@ -30,7 +28,7 @@ var Tree = React.createClass({
 
   render () {
     var pathGen;
-    var tree = d3.layout.tree().size([SIZE, SIZE]);
+    var tree = d3.tree().size([SIZE, SIZE]);
     var ort = this.props.horizontal ? ['y', 'x'] : ['x', 'y'];
     var root = this.props.tree[0];
     var nodes = tree.nodes(root);
@@ -38,14 +36,7 @@ var Tree = React.createClass({
     var depth = nodes.reduce((max, curr) => 
       curr.depth > max ? curr.depth : max, -1) + 1;
 
-    if (!this.props.line)
-      pathGen = d3.svg.diagonal()
-                      .projection((d) => [d[ort[0]], d[ort[1]]]);
-    else
-      pathGen = (d) => d3.svg.line()
-                       .x((d) => d[ort[0]])
-                       .y((d) => d[ort[1]])([{x: d.source.x, y: d.source.y}, 
-                                             {x: d.target.x, y: d.target.y}]);
+    pathGen = d3.diagonal().projection((d) => [d[ort[0]], d[ort[1]]]);
 
     nodes.forEach((d) => {d.y = d.depth * SIZE/depth;});
 
